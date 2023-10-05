@@ -54,7 +54,7 @@ public class UserController {
 
     @PreAuthorize(value = "hasRole('USER')")
     @GetMapping("/user/profile")
-    public ResponseEntity<User> getByEmail(@RequestParam("email") String email){
+    public ResponseEntity<Optional<UserDTO>> getByEmail(@RequestParam("email") String email){
         return ResponseEntity.ok(service.findByEmail(email));
     }
 
