@@ -19,8 +19,8 @@ import java.util.List;
 public class UserDTO {
     private Long id;
     private String email;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String password;
     private Timestamp created_at;
     private Timestamp updated_at;
