@@ -3,6 +3,10 @@ package com.plannerbe.domain.mapper;
 import com.plannerbe.domain.dto.UserDTO;
 import com.plannerbe.domain.entity.User;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserMapper {
 
     public UserDTO toDTO(User user) {

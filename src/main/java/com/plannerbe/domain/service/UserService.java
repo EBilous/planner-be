@@ -1,6 +1,7 @@
 package com.plannerbe.domain.service;
 
 import com.plannerbe.domain.dto.UserDTO;
+import com.plannerbe.domain.entity.User;
 
 import org.springframework.transaction.annotation.Transactional;
 

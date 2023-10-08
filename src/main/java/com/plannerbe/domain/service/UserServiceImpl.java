@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         if (userRepository.existsById(id)) {
             User user = userMapper.toEntity(userDTO);
-            user.setId(Math.toIntExact(id));
+            user.setId(id);
             user = userRepository.save(user);
             return userMapper.toDTO(user);
         }

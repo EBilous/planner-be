@@ -1,7 +1,6 @@
 package com.plannerbe.domain.controller;
 
 import com.plannerbe.domain.dto.UserDTO;
-import com.plannerbe.domain.entity.User;
 import com.plannerbe.domain.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class UserController {
 
     @PreAuthorize(value = "hasRole('USER')")
     @PostMapping("/user/sign-up")
-    public ResponseEntity<UserDTO> userSignup(@RequestBody User user){
-        return ResponseEntity.ok(service.createUser(user));
+    public ResponseEntity<UserDTO> userSignup(@RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(service.createUser(userDTO));
     }
 }

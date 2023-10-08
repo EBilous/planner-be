@@ -27,6 +27,4 @@ public class Address {
     private String street;
     private String buildingNumber;
     private String phone;
-    private String latitude;
-    private String longitude;
 }
