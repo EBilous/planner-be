@@ -6,13 +6,19 @@ import org.hibernate.annotations.Generated;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,23 +35,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    
+
     @Column(name = "first_name", nullable = false)
     String firstName;
-    
+
     @Column(name = "last_name", nullable = false)
     String lastName;
-    
+
     @Column(nullable = false, unique = true)
     String email;
-    
+
     @Column(nullable = false)
     String password;
     String phone;
-    
+
     @OneToOne()
     Address address_id;
-    
+
     @ManyToMany
     @JoinTable(
         name = "user_role", schema = "planner_db",
@@ -65,11 +71,11 @@ public class User {
     )
     @JsonIgnore
     private List<Role> roleList = new ArrayList<>();
-    
+
     @Column
     @Generated
     Timestamp created_at;
-    
+
     @Column
     @Generated
     Timestamp updated_at;
