@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,8 @@ public class Point {
     private String latitude;
     private String longitude;
     private String image;
+    @OneToOne()
+    Address address;
     @ManyToMany
     @JoinTable(
         name = "point_category",

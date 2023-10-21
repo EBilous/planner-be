@@ -57,7 +57,6 @@ public class UserController {
         return ResponseEntity.ok(service.findByEmail(email));
     }
 
-    @PreAuthorize(value = "hasRole('USER')")
     @PostMapping("/user/sign-up")
     public ResponseEntity<UserDTO> userSignup(@RequestBody UserDTO userDTO){
         return ResponseEntity.ok(service.createUser(userDTO));
