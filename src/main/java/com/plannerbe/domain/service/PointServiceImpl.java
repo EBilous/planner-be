@@ -37,9 +37,9 @@ public class PointServiceImpl implements PointService {
     @Transactional
     public PointDTO createPoint(PointDTO pointDto) {
         Point point = pointMapper.toEntity(pointDto);
-        point = pointRepository.save(point);
         Address address = addressMapper.toEntity(pointDto.getAddress());
-        addressRepository.save(address);
+        point.setAddress(address);
+        point = pointRepository.save(point);
         return pointMapper.toDTO(point);
     }
 

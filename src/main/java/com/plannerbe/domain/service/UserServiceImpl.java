@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService{
         User user = userMapper.toEntity(userDTO);
         Address address = addressMapper.toEntity(userDTO.getAddress());
         addressRepository.save(address);
-        /*user = user.setAddress();*/
+        user.setAddress(address);
         user = userRepository.save(user);
         return userMapper.toDTO(user);
     }
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService{
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<UserDTO> getUserById(Long id) {
+    public Optional<UserDTO> getUserById(Long id) throws HttpClientErrorException.NotFound {
         return userRepository.findById(id).map(userMapper::toDTO);
     }
 

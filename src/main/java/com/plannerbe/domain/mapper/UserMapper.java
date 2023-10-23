@@ -2,12 +2,19 @@ package com.plannerbe.domain.mapper;
 
 import com.plannerbe.domain.dto.UserDTO;
 import com.plannerbe.domain.entity.User;
+import com.plannerbe.domain.repository.AddressRepository;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
+
+    private final AddressRepository addressRepository;
+
+    public UserMapper(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
 
     public UserDTO toDTO(@NotNull User user) {
         UserDTO dto = new UserDTO();
