@@ -1,8 +1,11 @@
 package com.plannerbe.domain.service;
 
 import com.plannerbe.domain.dto.UserDTO;
+import com.plannerbe.domain.entity.Address;
 import com.plannerbe.domain.entity.User;
+import com.plannerbe.domain.mapper.AddressMapper;
 import com.plannerbe.domain.mapper.UserMapper;
+import com.plannerbe.domain.repository.AddressRepository;
 import com.plannerbe.domain.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -18,15 +21,22 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AddressRepository addressRepository;
+    private final AddressMapper addressMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, AddressRepository addressRepository, AddressMapper addressMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.addressRepository = addressRepository;
+        this.addressMapper = addressMapper;
     }
     @Transactional
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
+        Address address = addressMapper.toEntity(userDTO.getAddress());
+        addressRepository.save(address);
+        /*user = user.setAddress();*/
         user = userRepository.save(user);
         return userMapper.toDTO(user);
     }

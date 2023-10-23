@@ -30,4 +30,5 @@ public class UserDTO {
     @JsonIgnore
     private Timestamp updated_at;
     private List<RoleDTO> roleList;
+    private AddressDTO address;
 }

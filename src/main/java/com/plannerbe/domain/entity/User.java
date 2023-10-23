@@ -55,6 +55,7 @@ public class User {
     String phone;
 
     @OneToOne
+    @JoinColumn(name = "address_id")
     Address address;
 
     @ManyToMany

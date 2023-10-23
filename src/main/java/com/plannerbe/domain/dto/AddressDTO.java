@@ -14,11 +14,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class AddressDTO {
+    private Long id;
     private String country;
     private String city;
     private String street;
     private String buildingNumber;
     private String phone;
-    private String latitude;
-    private String longitude;
 }

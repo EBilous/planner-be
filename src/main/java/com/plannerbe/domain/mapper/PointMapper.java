@@ -5,7 +5,6 @@ import com.plannerbe.domain.entity.Point;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 @Component
 public class PointMapper {
@@ -28,7 +27,7 @@ public class PointMapper {
         point.setDescription(pointDTO.getDescription());
         point.setImage(pointDTO.getImage());
         point.setLatitude(pointDTO.getLatitude());
-        point.setLongitude(point.getLongitude());
+        point.setLongitude(pointDTO.getLongitude());
         return point;
     }
 }

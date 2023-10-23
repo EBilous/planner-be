@@ -1,8 +1,11 @@
 package com.plannerbe.domain.service;
 
 import com.plannerbe.domain.dto.PointDTO;
+import com.plannerbe.domain.entity.Address;
 import com.plannerbe.domain.entity.Point;
+import com.plannerbe.domain.mapper.AddressMapper;
 import com.plannerbe.domain.mapper.PointMapper;
+import com.plannerbe.domain.repository.AddressRepository;
 import com.plannerbe.domain.repository.PointRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +21,16 @@ public class PointServiceImpl implements PointService {
 
     private final PointRepository pointRepository;
     private final PointMapper pointMapper;
+    private final AddressRepository addressRepository;
+    private final AddressMapper addressMapper;
 
     @Autowired
-    public PointServiceImpl(PointRepository pointRepository, PointMapper pointMapper) {
+    public PointServiceImpl(PointRepository pointRepository, PointMapper pointMapper,
+                            AddressRepository addressRepository, AddressMapper addressMapper1) {
         this.pointRepository = pointRepository;
         this.pointMapper = pointMapper;
+        this.addressRepository = addressRepository;
+        this.addressMapper = addressMapper1;
     }
 
     @Override
@@ -30,6 +38,8 @@ public class PointServiceImpl implements PointService {
     public PointDTO createPoint(PointDTO pointDto) {
         Point point = pointMapper.toEntity(pointDto);
         point = pointRepository.save(point);
+        Address address = addressMapper.toEntity(pointDto.getAddress());
+        addressRepository.save(address);
         return pointMapper.toDTO(point);
     }
 
@@ -43,23 +53,8 @@ public class PointServiceImpl implements PointService {
         return Optional.empty();
     }
 
-    /*@Override
-    public Optional<PointDTO> getPointByName(String name) {
-        return Optional.empty();
-    }*/
-
-    /*@Override
-    public Optional<PointDTO> getPointByName(String name) {
-        return mapPointsToPointDTOS(pointRepository.findFirstByNameIgnoreCase(name));
-    }*/
-
     @Override
     public List<PointDTO> getPointByCity(String city) {
         return pointRepository.findAllByAddress_City(city).stream().map(pointMapper::toDTO).collect(Collectors.toList());
     }
-
-    /*protected Optional<PointDTO> mapPointsToPointDTOS(List<Point> points) {
-        //TODO Implement mapping
-        return null;
-    }*/
 }
