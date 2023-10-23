@@ -22,8 +22,8 @@ public class TestBeansConfiguration {
     @Bean
     @Scope("prototype")
     public List<Integer> integersCollection() {
-        List<Integer> listIntegers = new Random().ints(5, 1, 10)
+
+        return new Random().ints(5, 1, 10)
             .boxed().toList();
-        return listIntegers;
     }
 }

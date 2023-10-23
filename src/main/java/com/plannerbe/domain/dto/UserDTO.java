@@ -1,5 +1,7 @@
 package com.plannerbe.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,17 +14,21 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
+@Builder
 @ToString
 public class UserDTO {
     private Long id;
     private String email;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String password;
+    private String phone;
+    @JsonIgnore
     private Timestamp created_at;
+    @JsonIgnore
     private Timestamp updated_at;
     private List<RoleDTO> roleList;
+    private AddressDTO address;
 }
