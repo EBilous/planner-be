@@ -14,10 +14,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PointServiceImpl implements PointService{
+public class PointServiceImpl implements PointService {
 
     private final PointRepository pointRepository;
     private final PointMapper pointMapper;
+
     @Autowired
     public PointServiceImpl(PointRepository pointRepository, PointMapper pointMapper) {
         this.pointRepository = pointRepository;
@@ -27,26 +28,38 @@ public class PointServiceImpl implements PointService{
     @Override
     @Transactional
     public PointDTO createPoint(PointDTO pointDto) {
-        Point point = pointMapper.toPointEntity(pointDto);
+        Point point = pointMapper.toEntity(pointDto);
         point = pointRepository.save(point);
-        return pointMapper.toPointDto(point);
+        return pointMapper.toDTO(point);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<PointDTO> getPointById(Long id) {
-        return pointRepository.findById(id).map(pointMapper::toPointDto);
+        return pointRepository.findById(id).map(pointMapper::toDTO);
     }
 
     @Override public Optional<PointDTO> getPointByName(String name) {
         return Optional.empty();
     }
 
-/*    @Override public Optional<PointDTO> getPointByName(String name) {
-        return pointRepository.findFirstByNameIgnoreCase(name).get(pointMapper::toPointDto);
+    /*@Override
+    public Optional<PointDTO> getPointByName(String name) {
+        return Optional.empty();
     }*/
 
-    @Override public List<PointDTO> getPointByCity(String city) {
-        return pointRepository.findAllByAddress_City(city).stream().map(pointMapper::toPointDto).collect(Collectors.toList());
+    /*@Override
+    public Optional<PointDTO> getPointByName(String name) {
+        return mapPointsToPointDTOS(pointRepository.findFirstByNameIgnoreCase(name));
+    }*/
+
+    @Override
+    public List<PointDTO> getPointByCity(String city) {
+        return pointRepository.findAllByAddress_City(city).stream().map(pointMapper::toDTO).collect(Collectors.toList());
     }
+
+    /*protected Optional<PointDTO> mapPointsToPointDTOS(List<Point> points) {
+        //TODO Implement mapping
+        return null;
+    }*/
 }

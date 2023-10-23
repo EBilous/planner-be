@@ -1,5 +1,8 @@
 package com.plannerbe.domain.entity;
 
+import org.jetbrains.annotations.NotNull;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,14 +28,56 @@ public class Point {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String name;
     private String description;
     private String latitude;
     private String longitude;
     private String image;
-    @OneToOne()
+
+    public String getCountry() {
+        return address.getCountry();
+    }
+
+    public String getCity() {
+        return address.getCity();
+    }
+
+    public String getStreet() {
+        return address.getStreet();
+    }
+
+    public String getBuildingNumber() {
+        return address.getBuildingNumber();
+    }
+
+    public String getPhone() {
+        return address.getPhone();
+    }
+
+    public void setCountry(String country) {
+        address.setCountry(country);
+    }
+
+    public void setCity(String city) {
+        address.setCity(city);
+    }
+
+    public void setStreet(String street) {
+        address.setStreet(street);
+    }
+
+    public void setBuildingNumber(String buildingNumber) {
+        address.setBuildingNumber(buildingNumber);
+    }
+
+    public void setPhone(String phone) {
+        address.setPhone(phone);
+    }
+
+    @OneToOne(cascade=CascadeType.ALL)
     Address address;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
         name = "point_category",
         joinColumns = {

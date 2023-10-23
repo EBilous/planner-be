@@ -7,6 +7,8 @@ import com.plannerbe.domain.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +37,7 @@ public class PointController {
     }
 
     @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
-    @PostMapping("/poi/get/{id}")
+    @GetMapping("/poi/get/{id}")
     public ResponseEntity<Optional<PointDTO>> getPointById(@PathVariable Long id){
         return ResponseEntity.ok(service.getPointById(id));
     }

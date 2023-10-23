@@ -31,6 +31,13 @@ public class UserServiceImpl implements UserService{
         return userMapper.toDTO(user);
     }
 
+    /*public void update() {
+        User person = userRepository.findById(use);
+        Address address = new Address();
+        Address saved = addressRepository.save(address );
+        person.getAddresses().add(saved);
+    }*/
+
     @Transactional(readOnly = true)
     @Override
     public Optional<UserDTO> getUserById(Long id) {

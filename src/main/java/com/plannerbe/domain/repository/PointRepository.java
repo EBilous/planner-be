@@ -16,9 +16,9 @@ public interface PointRepository extends JpaRepository<Point, Long> {
 
     @Override @NotNull List<Point> findAll();
 
-    List<PointDTO> findFirstByNameIgnoreCase(String name);
+    List<Point> findFirstByNameIgnoreCase(String name);
 
-    List<Point> findPointsBy(Collection<String> names, Sort sort);
+    List<Point> findPointsByName(Collection<String> names, Sort sort);
 
     List<Point> findAllByAddress_City(String city);
 

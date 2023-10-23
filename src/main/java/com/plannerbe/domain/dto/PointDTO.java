@@ -2,7 +2,14 @@ package com.plannerbe.domain.dto;
 
 import com.plannerbe.domain.entity.Category;
 
+import org.springframework.validation.annotation.Validated;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -11,13 +18,19 @@ import java.util.List;
  */
 
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder
-public record PointDTO(){
-    static Long id;
-    static String name;
-    static String description;
-    static String latitude;
-    static String longitude;
-    static String image;
-    static List<Category> categoryIds;
+@ToString
+public class PointDTO{
+    private Long id;
+    private String name;
+    private String description;
+    private String latitude;
+    private String longitude;
+    private String image;
+
+    private List<Category> categoriesIds;
 }
