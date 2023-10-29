@@ -81,4 +81,11 @@ public class UserServiceImpl implements UserService {
     public Optional<UserDTO> findByEmail(String email) {
         return userRepository.findByEmail(email).map(userMapper::toDTO);
     }
+
+    @Override public List<UserDTO> findByLastName(String lastName) {
+        return userRepository.findByLastName(lastName)
+            .stream()
+            .map(userMapper::toDTO)
+            .collect(Collectors.toList());
+    }
 }

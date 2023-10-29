@@ -18,4 +18,6 @@ public interface UserService {
     List<UserDTO> findAllUsers();
 
     Optional<UserDTO> findByEmail(String email);
+
+    List<UserDTO> findByLastName(String lastName);
 }
