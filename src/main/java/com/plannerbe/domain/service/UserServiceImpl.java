@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AddressRepository addressRepository;
@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService{
         this.addressRepository = addressRepository;
         this.addressMapper = addressMapper;
     }
+
     @Transactional
     @Override
     public UserDTO createUser(UserDTO userDTO) {
@@ -41,13 +42,6 @@ public class UserServiceImpl implements UserService{
         user = userRepository.save(user);
         return userMapper.toDTO(user);
     }
-
-    /*public void update() {
-        User person = userRepository.findById(use);
-        Address address = new Address();
-        Address saved = addressRepository.save(address );
-        person.getAddresses().add(saved);
-    }*/
 
     @Transactional(readOnly = true)
     @Override
@@ -72,6 +66,7 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     @Override
     public List<UserDTO> findAllUsers() {
@@ -80,6 +75,7 @@ public class UserServiceImpl implements UserService{
             .map(userMapper::toDTO)
             .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     @Override
     public Optional<UserDTO> findByEmail(String email) {
