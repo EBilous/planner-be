@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PointService {
-    @Transactional PointDTO createPoint(PointDTO pointDto);
-    @Transactional(readOnly = true) Optional<PointDTO> getPointById(Long id);
-    @Transactional(readOnly = true) Optional<PointDTO> getPointByName(String name);
-    @Transactional(readOnly = true) List<PointDTO> getPointByCity(String city);
+    PointDTO createPoint(PointDTO pointDto);
+    Optional<PointDTO> getPointById(Long id);
+    Optional<PointDTO> getPointByName(String name);
+    List<PointDTO> getPointByCity(String city);
 }

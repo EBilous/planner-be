@@ -46,8 +46,8 @@ public class UserController {
 
     @PreAuthorize(value = "hasRole('USER')")
     @GetMapping("/user/profile/{userId}")
-    public ResponseEntity<Optional<UserDTO>> getParameter(@PathVariable("userId") String userId){
-        return ResponseEntity.ok(service.getUserById(Long.valueOf(userId)));
+    public ResponseEntity<Optional<UserDTO>> getUserProfile(@PathVariable("userId") String userId){
+        return ResponseEntity.ok(service.findById(Long.valueOf(userId)));
     }
 
 

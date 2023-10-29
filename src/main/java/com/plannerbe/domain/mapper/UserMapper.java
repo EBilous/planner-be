@@ -1,5 +1,6 @@
 package com.plannerbe.domain.mapper;
 
+import com.plannerbe.domain.dto.AddressDTO;
 import com.plannerbe.domain.dto.UserDTO;
 import com.plannerbe.domain.entity.User;
 import com.plannerbe.domain.repository.AddressRepository;
@@ -9,13 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-
-    private final AddressRepository addressRepository;
-
-    public UserMapper(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
-
     public UserDTO toDTO(@NotNull User user) {
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
@@ -24,6 +18,7 @@ public class UserMapper {
         dto.setFirstName(user.getFirstName());
         dto.setPassword(user.getPassword());
         dto.setPhone(user.getPhone());
+        dto.setAddress(AddressDTO.builder().build());
         return dto;
     }
 

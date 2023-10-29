@@ -75,8 +75,8 @@ public class Point {
         address.setPhone(phone);
     }
 
-    @OneToOne(cascade=CascadeType.ALL)
-    Address address;
+    @OneToOne(cascade= CascadeType.PERSIST)
+    private Address address;
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
         name = "point_category",

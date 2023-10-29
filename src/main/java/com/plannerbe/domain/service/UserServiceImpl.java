@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService{
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<UserDTO> getUserById(Long id) throws HttpClientErrorException.NotFound {
+    public Optional<UserDTO> findById(Long id) throws HttpClientErrorException.NotFound {
         return userRepository.findById(id).map(userMapper::toDTO);
     }
 

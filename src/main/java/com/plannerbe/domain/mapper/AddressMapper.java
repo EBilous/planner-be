@@ -23,7 +23,7 @@ public class AddressMapper {
         Address address = new Address();
         address.setCountry(addressDTO.getCountry());
         address.setCity(addressDTO.getCity());
-        address.setStreet(address.getStreet());
+        address.setStreet(addressDTO.getStreet());
         address.setBuildingNumber(addressDTO.getBuildingNumber());
         address.setPhone(addressDTO.getPhone());
         return address;
