@@ -23,6 +23,7 @@ dependencies {
 	implementation 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.security:spring-security-core:6.1.4'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.0-M2'
 
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	implementation 'org.jetbrains:annotations:24.0.0'

@@ -41,8 +41,7 @@ public class User {
     String password;
     String phone;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
+    @OneToOne(cascade= CascadeType.PERSIST)
     Address address;
 
     @ManyToMany

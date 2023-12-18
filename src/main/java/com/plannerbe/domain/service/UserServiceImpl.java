@@ -1,5 +1,6 @@
 package com.plannerbe.domain.service;
 
+import com.plannerbe.domain.dto.AddressDTO;
 import com.plannerbe.domain.dto.UserDTO;
 import com.plannerbe.domain.entity.Address;
 import com.plannerbe.domain.entity.User;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AddressRepository addressRepository;
@@ -31,27 +32,21 @@ public class UserServiceImpl implements UserService{
         this.addressRepository = addressRepository;
         this.addressMapper = addressMapper;
     }
+
     @Transactional
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
-        Address address = addressMapper.toEntity(userDTO.getAddress());
+        Address address = addressMapper.toEntity(AddressDTO.builder().build());
         addressRepository.save(address);
         user.setAddress(address);
         user = userRepository.save(user);
         return userMapper.toDTO(user);
     }
 
-    /*public void update() {
-        User person = userRepository.findById(use);
-        Address address = new Address();
-        Address saved = addressRepository.save(address );
-        person.getAddresses().add(saved);
-    }*/
-
     @Transactional(readOnly = true)
     @Override
-    public Optional<UserDTO> getUserById(Long id) throws HttpClientErrorException.NotFound {
+    public Optional<UserDTO> findById(Long id) throws HttpClientErrorException.NotFound {
         return userRepository.findById(id).map(userMapper::toDTO);
     }
 
@@ -72,6 +67,7 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     @Override
     public List<UserDTO> findAllUsers() {
@@ -80,9 +76,17 @@ public class UserServiceImpl implements UserService{
             .map(userMapper::toDTO)
             .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     @Override
     public Optional<UserDTO> findByEmail(String email) {
         return userRepository.findByEmail(email).map(userMapper::toDTO);
+    }
+
+    @Override public List<UserDTO> findByLastName(String lastName) {
+        return userRepository.findByLastName(lastName)
+            .stream()
+            .map(userMapper::toDTO)
+            .collect(Collectors.toList());
     }
 }

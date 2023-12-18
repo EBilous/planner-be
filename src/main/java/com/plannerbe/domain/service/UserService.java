@@ -2,22 +2,22 @@ package com.plannerbe.domain.service;
 
 import com.plannerbe.domain.dto.UserDTO;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    @Transactional UserDTO createUser(UserDTO userDTO);
+    UserDTO createUser(UserDTO userDTO);
 
-    @Transactional(readOnly = true) Optional<UserDTO> getUserById(Long id);
+    Optional<UserDTO> findById(Long id);
 
-    @Transactional UserDTO updateUser(Long id, UserDTO userDTO);
+    UserDTO updateUser(Long id, UserDTO userDTO);
 
-    @Transactional void deleteUser(Long id);
+    void deleteUser(Long id);
 
-    @Transactional List<UserDTO> findAllUsers();
+    List<UserDTO> findAllUsers();
 
-    @Transactional Optional<UserDTO> findByEmail(String email);
+    Optional<UserDTO> findByEmail(String email);
+
+    List<UserDTO> findByLastName(String lastName);
 }

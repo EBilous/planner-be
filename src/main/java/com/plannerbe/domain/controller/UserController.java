@@ -6,6 +6,7 @@ import com.plannerbe.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,8 +47,8 @@ public class UserController {
 
     @PreAuthorize(value = "hasRole('USER')")
     @GetMapping("/user/profile/{userId}")
-    public ResponseEntity<Optional<UserDTO>> getParameter(@PathVariable("userId") String userId){
-        return ResponseEntity.ok(service.getUserById(Long.valueOf(userId)));
+    public ResponseEntity<Optional<UserDTO>> getUserProfile(@PathVariable("userId") String userId){
+        return ResponseEntity.ok(service.findById(Long.valueOf(userId)));
     }
 
 
@@ -58,7 +59,7 @@ public class UserController {
     }
 
     @PostMapping("/user/sign-up")
-    public ResponseEntity<UserDTO> userSignup(@RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> userSignup(@RequestBody @Validated UserDTO userDTO){
         return ResponseEntity.ok(service.createUser(userDTO));
     }
 }

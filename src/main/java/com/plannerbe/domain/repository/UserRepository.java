@@ -12,16 +12,17 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    default @NotNull Optional<User> findById(@NotNull Long id) {
-        return Optional.empty();
-    }
+
+    @Override @NotNull
+    Optional<User> findById(@NotNull Long aLong);
 
     Optional<User> findByLastName(String surname);
 
     default void deleteById(@NotNull Long aLong) {
     }
 
-    @Override default @NotNull List<User> findAll(@NotNull Sort sort) {
+    @Override
+    default List<User> findAll(@NotNull Sort sort) {
         return null;
     }
 
