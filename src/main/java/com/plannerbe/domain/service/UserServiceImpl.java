@@ -1,5 +1,6 @@
 package com.plannerbe.domain.service;
 
+import com.plannerbe.domain.dto.AddressDTO;
 import com.plannerbe.domain.dto.UserDTO;
 import com.plannerbe.domain.entity.Address;
 import com.plannerbe.domain.entity.User;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
-        Address address = addressMapper.toEntity(userDTO.getAddress());
+        Address address = addressMapper.toEntity(AddressDTO.builder().build());
         addressRepository.save(address);
         user.setAddress(address);
         user = userRepository.save(user);
